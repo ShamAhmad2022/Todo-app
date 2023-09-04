@@ -1,90 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import useForm from '../../hooks/form';
-
 import { v4 as uuid } from 'uuid';
+import  { SettingsContext } from '../../Conext/Settings';
+import './Todo.scss';
+
 
 const Todo = () => {
 
-  const [defaultValues] = useState({
-    difficulty: 4,
-  });
-  const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
-  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  const settings = useContext(SettingsContext);
+
+  const { handleChange, handleSubmit } = useForm(addItem, settings.defaultValues);
 
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
     console.log(item);
-    setList([...list, item]);
+    settings.setList([...settings.list, item]);
   }
 
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
-    setList(items);
+    const items = settings.list.filter( item => item.id !== id );
+    settings.setList(items);
   }
 
   function toggleComplete(id) {
 
-    const items = list.map( item => {
+    const items = settings.list.map( item => {
       if ( item.id === id ) {
         item.complete = ! item.complete;
       }
       return item;
     });
 
-    setList(items);
+    settings.setList(items);
 
   }
 
   useEffect(() => {
-    let incompleteCount = list.filter(item => !item.complete).length;
-    setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
+    let incompleteCount = settings.list.filter(item => !item.complete).length;
+    settings.setIncomplete(incompleteCount);
+    document.title = `To Do List: ${settings.incomplete}`;
     // linter will want 'incomplete' added to dependency array unnecessarily. 
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [list]);  
+  }, [settings.list]);  
 
   return (
     <>
       <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
+      <div class="p-3 mb-2 bg-secondary text-white"><h1 data-testid="todo-h1">To Do List: {settings.incomplete} items pending</h1></div>
       </header>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="col-4 todo-form">
 
         <h2>Add To Do Item</h2>
 
+        <br></br>
         <label>
           <span>To Do Item</span>
           <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
         </label>
 
+        <br></br>
         <label>
           <span>Assigned To</span>
           <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
         </label>
 
+        <br></br>
         <label>
           <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+          <input onChange={handleChange} defaultValue={settings.defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
         </label>
+        <br></br>
 
         <label>
           <button type="submit">Add Item</button>
         </label>
       </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
 
     </>
   );
