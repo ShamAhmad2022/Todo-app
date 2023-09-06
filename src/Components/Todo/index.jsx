@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import useForm from '../../hooks/form';
 import { v4 as uuid } from 'uuid';
 import  { SettingsContext } from '../../Conext/Settings';
+import List from '../List';
 import './Todo.scss';
 
 
@@ -18,24 +19,6 @@ const Todo = () => {
     settings.setList([...settings.list, item]);
   }
 
-  function deleteItem(id) {
-    const items = settings.list.filter( item => item.id !== id );
-    settings.setList(items);
-  }
-
-  function toggleComplete(id) {
-
-    const items = settings.list.map( item => {
-      if ( item.id === id ) {
-        item.complete = ! item.complete;
-      }
-      return item;
-    });
-
-    settings.setList(items);
-
-  }
-
   useEffect(() => {
     let incompleteCount = settings.list.filter(item => !item.complete).length;
     settings.setIncomplete(incompleteCount);
@@ -47,38 +30,40 @@ const Todo = () => {
 
   return (
     <>
-      <header data-testid="todo-header">
-      <div class="p-3 mb-2 bg-secondary text-white"><h1 data-testid="todo-h1">To Do List: {settings.incomplete} items pending</h1></div>
-      </header>
+    <header data-testid="todo-header">
+    <div class="p-3 mb-2 bg-secondary text-white"><h1 data-testid="todo-h1">To Do List: {settings.incomplete} items pending</h1></div>
+    </header>
 
-      <form onSubmit={handleSubmit} className="col-4 todo-form">
+    <div className='flex-con'>
+      <div className='todo-form'>
+        <form onSubmit={handleSubmit} className='flex-form'>
+            <h2>Add To Do Item</h2>
 
-        <h2>Add To Do Item</h2>
+            <label>
+              <span>To Do Item</span>
+              <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+            </label>
 
-        <br></br>
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
+            <label>
+              <span>Assigned To</span>
+              <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+            </label>
 
-        <br></br>
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
+            <label>
+              <span>Difficulty</span>
+              <input onChange={handleChange} defaultValue={settings.defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+            </label>
 
-        <br></br>
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={settings.defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
-        <br></br>
+            <label>
+              <button type="submit">Add Item</button>
+            </label>
+        </form>
+      </div>
 
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
+      <div className='list-flex'>
+        <List />
+      </div>
+    </div>
     </>
   );
 };
