@@ -19,6 +19,11 @@ const Todo = () => {
     settings.setList([...settings.list, item]);
   }
 
+  function deleteItem(id) {
+    const items = settings.list.filter( item => item.id !== id );
+    settings.setList(items);
+  }
+
   useEffect(() => {
     let incompleteCount = settings.list.filter(item => !item.complete).length;
     settings.setIncomplete(incompleteCount);
@@ -30,9 +35,9 @@ const Todo = () => {
 
   return (
     <>
-    <header data-testid="todo-header">
-    <div class="p-3 mb-2 bg-secondary text-white"><h1 data-testid="todo-h1">To Do List: {settings.incomplete} items pending</h1></div>
-    </header>
+      <header data-testid="todo-header">
+      <div class="p-3 mb-2 bg-secondary text-white"><h1 data-testid="todo-h1">To Do List: {settings.incomplete} items pending</h1></div>
+      </header>
 
     <div className='flex-con'>
       <div className='todo-form'>

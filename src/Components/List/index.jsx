@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { SettingsContext } from '../../Conext/Settings';
 import { Container, Pagination } from '@mantine/core';
 import './List.scss';
@@ -8,7 +8,7 @@ function List() {
 
   const settings = useContext(SettingsContext);
 
-  const itemsPerPage = 3; 
+  const itemsPerPage = settings.numberOfItemsToDisplay; 
   const totalItems = settings.list.length; 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -26,7 +26,7 @@ function List() {
   }
 
   function deleteItem(id) {
-    const items = settings.list.filter( item => item.id !== id );
+    const items = settings.displayCompletedItem ? settings.list : settings.list.filter( item => item.id !== id );
     settings.setList(items);
   }
 
@@ -40,6 +40,15 @@ function List() {
   const handlePageChange = (newPage) => {
     settings.setCurrentPage(newPage);
   };
+
+  useEffect(() => {
+    const savedLists = JSON.parse(localStorage.getItem('ToDoList'));
+    console.log(savedLists,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    if (savedLists) {
+      settings.setList(savedLists);
+    }
+  }, []);
+
 
   return (
    <>
