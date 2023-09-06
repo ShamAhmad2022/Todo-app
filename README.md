@@ -6,11 +6,11 @@ A Web Application for securely managing a To Do List.
 In today's lab I added the functionality of updating the display of the completed tasks, the settings of the number of page to display, and the sort keyword, and i added the data to the local storage.
 ## URLs
 
-* deployed application : `Site deploy failed on netlify, i don't know why`
+* deployed application : `Site deploy failed on netlify :(`
 
 * Github actions: [https://github.com/ShamAhmad2022/todo-app/actions](https://github.com/ShamAhmad2022/todo-app/actions)
 
-*  pull request: [https://github.com/ShamAhmad2022/todo-app/pull/1](https://github.com/ShamAhmad2022/todo-app/pull/1)
+*  pull request: [https://github.com/ShamAhmad2022/todo-app/pull/3](https://github.com/ShamAhmad2022/todo-app/pull/3)
 
 ### Setup:
 run: `npm i`
