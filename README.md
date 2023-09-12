@@ -3,7 +3,9 @@
 Authors: Sham Al-Jalam
 
 A Web Application for securely managing a To Do List.
-In today's lab I added the functionality of updating the display of the completed tasks, the settings of the number of page to display, and the sort keyword, and i added the data to the local storage.
+I added the functionality of updating the display of the completed tasks, the settings of the number of page to display, and the sort keyword, and i added the data to the local storage. and in today's and yesterday's lab  i added a log in and an authentication system that allows user to do tasks based on their roles.
+
+-Note: for the backend side i used my API that i have built from Lab 08 [https://auth-api-ylcl.onrender.com](https://auth-api-ylcl.onrender.com)
 ## URLs
 
 * deployed application : `Site deploy failed on netlify :(`
@@ -14,6 +16,20 @@ In today's lab I added the functionality of updating the display of the complete
 
 ### Setup:
 run: `npm i`
+
+#### users:
+here are some users you can try to log in with:
+
+- an Admin user that has all the capabilities:
+
+    - username: sham
+    - password: s123
+
+- an regular user that has only the read capability:
+
+    - username: Liam
+    - password: s123
+    
 ### Running the app:
 * npm start
 
