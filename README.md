@@ -11,7 +11,7 @@ I added the functionality of updating the display of the completed tasks, the se
 
 * Github actions: [https://github.com/ShamAhmad2022/todo-app/actions](https://github.com/ShamAhmad2022/todo-app/actions)
 
-*  pull request: [https://github.com/ShamAhmad2022/todo-app/pull/3](https://github.com/ShamAhmad2022/todo-app/pull/3)
+*  pull request: [https://github.com/ShamAhmad2022/todo-app/pull/5](https://github.com/ShamAhmad2022/todo-app/pull/5)
 
 ### Setup:
 run: `npm i`
