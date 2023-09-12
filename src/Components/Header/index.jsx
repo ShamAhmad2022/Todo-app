@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Login from '../Login ';
 
 function AppHeader() {
   return (
@@ -20,8 +21,11 @@ function AppHeader() {
         </li>
       </ul>
     </div>
+    <Login />
   </div>
-</nav></>
+</nav>
+
+</>
   )
 }
 

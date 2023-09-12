@@ -9,7 +9,7 @@ function List() {
   const settings = useContext(SettingsContext);
 
   const itemsPerPage = settings.numberOfItemsToDisplay; 
-  const totalItems = settings.list.length; 
+  const totalItems = 0 || settings.list.length; 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   function toggleComplete(id) {
@@ -41,14 +41,15 @@ function List() {
     settings.setCurrentPage(newPage);
   };
 
-  useEffect(() => {
-    const savedLists = JSON.parse(localStorage.getItem('ToDoList'));
-    console.log(savedLists,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    if (savedLists) {
-      settings.setList(savedLists);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedLists = JSON.parse(localStorage.getItem('ToDoList'));
+  //   console.log(savedLists,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  //   if (savedLists.length) {
+  //     settings.setList(savedLists);
+  //   }
+  // }, []);
 
+  console.log(settings.list, '000000000000000000000000000000');
 
   return (
    <>

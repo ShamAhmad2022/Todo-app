@@ -4,11 +4,14 @@ import AppHeader from "./Components/Header";
 import SettingsPage from "./Components/settingsPage/SettingsPage";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
+import Login from "./Components/Login ";
+import LoginProvider from "./Conext/AuthContext";
 
 export default class App extends React.Component {
   render() {
     return (
       <>
+      <LoginProvider>
         <AppHeader />
         <div className="container">
           <Routes>
@@ -16,6 +19,7 @@ export default class App extends React.Component {
             <Route exact path="/settings" element={<SettingsPage />} />
           </Routes>
         </div>
+      </LoginProvider>
       </>
     );
   }
