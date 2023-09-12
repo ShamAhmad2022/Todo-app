@@ -3,33 +3,11 @@ import cookie from "react-cookies";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
-const testUsers = {
-  Administrator: {
-    password: "admin",
-    name: "Administrator",
-    token: "YOUR_ADMIN_TOKEN_HERE",
-  },
-  Editor: {
-    password: "editor",
-    name: "Editor",
-    token: "YOUR_EDITOR_TOKEN_HERE",
-  },
-  Writer: {
-    password: "writer",
-    name: "Writer",
-    token: "YOUR_WRITER_TOKEN_HERE",
-  },
-  User: {
-    password: "user",
-    name: "User",
-    token: "YOUR_USER_TOKEN_HERE",
-  },
-};
-
 export const LoginContext = React.createContext();
 
 function LoginProvider(props) {
-  const [loggedIn, setLoggedIn] = useState(false); //✔
+  const [loggedIn, setLoggedIn] = useState(false);
+  // eslint-disable-next-line
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
@@ -38,7 +16,7 @@ function LoginProvider(props) {
     return user.capabilities.includes(capability);
   };
 
-  const login = async (username, password) => { //✔
+  const login = async (username, password) => {
     try {
       const loginRequest = await axios.post(
         "https://auth-api-ylcl.onrender.com/signin",
@@ -84,6 +62,7 @@ function LoginProvider(props) {
     const cookieToken = cookie.load("auth");
     const token = qs.get("token") || cookieToken || null;
     validateToken(token);
+    // eslint-disable-next-line
   }, []);
 
   return (

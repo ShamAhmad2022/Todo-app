@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { SettingsContext } from '../../Conext/Settings';
 import { Container, Pagination } from '@mantine/core';
 import './List.scss';
