@@ -62,7 +62,7 @@ const Todo = () => {
       "role":role
     }
 
-    const res = await axios.post('https://auth-api-ylcl.onrender.com/signup', obj);
+    const res = await axios.post('https://backendserver-h5d1.onrender.com/signup', obj);
     if(res.status === 201){
       alert('user has created sucessfully, you may now Login');
       e.target.elements.email.value = '';
